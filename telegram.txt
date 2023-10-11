@@ -1,0 +1,131 @@
+Aim - Write a program to display (blink) the LED using Telegram bot (bot father)
+
+Apparatus: Rasberry Pi 3 Bt, breadboard jumper wires, single register
+
+Program :-
+
+import sys
+import random
+import time
+import telepot
+import RPi.GPIO as GPIO
+GPIO.setmode (GPTO.BOARD) 
+GPIO.setup (11,GPTO.OUT)
+
+def on (Pin):
+ GPIO.output (Pin, GPIO.HIGH)
+ return
+def off (Pin)
+ GPIO.output (Pin, GPIO.LOW)
+ return
+
+def handle (msg):
+ chat_id = msg ['chat'] ['id']
+ command = msg ['text']
+ print ('Got command % s ' % command)
+ If command == "ON" :
+   bot.sendMessage(chat_id , on(11))
+ elif command == "OFF" :
+   bot.sendMessage(chat id , off(11))
+
+bot = telebot.Bot ('6684355......')
+bot.message_loop(handle)
+print (' I am here ')
+
+*************************************************************************
+
+Aim - Write a program to display pattern of LED using Telegram bot (bot father)
+
+Program :
+
+import sys
+import random
+import time
+import telepot
+import RPi.GPIO as GPIO
+GPIO.setmode (GPTO.BOARD) 
+GPIO.setup (11,GPTO.OUT)
+GPIO.setup (12,GPTO.OUT)
+GPIO.setup (13,GPTO.OUT)
+
+def ON():
+ while(1):
+  GPIO.output (11,1)
+  GPIO.output (12,0)
+  GPIO.output (13,1)
+  time.sleep(1)
+  GPIO.output (11,1)
+  GPIO.output (12,0)
+  GPIO.output (13,1)
+  time.sleep(1)
+ return
+
+def OFF():
+ GPIO.output (11,1)
+ GPIO.output (12,1)
+ GPIO.output (13,1)
+return
+
+def handle (msg):
+ chat_id = msg ['chat'] ['id']
+ command = msg ['text']
+ print ('Got command % s ' % command)
+ If command == "ON" :
+   bot.sendMessage(chat_id , ON())
+ elif command == "OFF" :
+   bot.sendMessage(chat id , OFF())
+
+bot = telebot.Bot ('6684355......')
+bot.message_loop(handle)
+print (' I am here ')
+
+************************************************************************
+
+Aim - Write a program to display CURRENT TIME using Telegram bot (bot father)
+
+Program :
+
+import sys
+import random
+import time
+import datetime
+import telepot
+import tm1637
+Display = tm1637.TM1637 (23,24,tm1637) 
+Display.clear()
+Display.setBrightnes(1)
+
+def on():
+ while (1):
+  now=datetime.datetime.now()
+  hour=now.hour
+  minutes=now.minutes
+  second=now.second
+  current time:[int (hour/10),hour%10, int (minute/10),minute%10 ]
+Display.show(current time)
+Display.ShowDoublePoint(second%2)
+time.sleep(1)
+
+def off():
+ Display.Clear()
+ Display.setBrightnes(0)
+
+def handle (msg):
+ chat_id = msg ['chat'] ['id']
+ command = msg ['text']
+ print ('Got command % s ' % command)
+ If command == "ON" :
+   bot.sendMessage(chat_id , on())
+ elif command == "OFF" :
+   bot.sendMessage(chat id , off())
+
+bot = telebot.Bot ('6684355......')
+bot.message_loop(handle)
+print (' I am here ')
+
+
+
+
+
+
+

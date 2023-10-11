@@ -1,0 +1,197 @@
+//  Blink of Led
+import time
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11,GPIO.OUT)
+while(1)
+   GPIO.output(11,1)
+   time.sleep(1)
+   GPIO.output(11,0)
+   time.sleep(1) 
+
+
+//pattern of led
+import time
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11,GPIO.OUT)
+GPIO.setup(13,GPIO.OUT)
+GPIO.setup(15,GPIO.OUT)
+GPIO.setup(12,GPIO.OUT)
+while(1):
+    GPIO.output(11,1)
+    time.sleep(0.1)
+    GPIO.output(11,0)
+    time.sleep(0.1)
+    GPIO.output(13,1)
+    time.sleep(0.1)
+    GPIO.output(13,0)
+    time.sleep(0.1)
+    GPIO.output(15,1)
+    time.sleep(0.1)
+    GPIO.output(15,0)
+    time.sleep(0.1)
+    GPIO.output(12,1)
+    time.sleep(0.1)
+    GPIO.output(12,0)
+    time.sleep(0.1)
+    time.sleep(0)
+
+//binary digit in pattern blink
+   
+import time
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11,GPIO.OUT)
+GPIO.setup(13,GPIO.OUT)
+GPIO.setup(15,GPIO.OUT)
+bina=['000','001','010','011','100','101','110','111']
+for i in range (0,15):
+    n=bina[i]
+    a=int (n[0])
+    b=int (n[1])
+    c=int (n[2])
+    GPIO.output(15,a)
+    GPIO.outout(13,b)
+    GPIO.output(11,c)
+    time.sleep(3)
+    
+
+
+////////// 4 digit 7 segment display time display
+
+
+import sys
+import time
+import datetime
+import RPi.GPIO as GPIO
+import tm1637.TM1637(23,24,tm1637.BRIGHT_TYPICAL)
+Display.clear()
+Display.setBrightness(1)
+while(True):
+    now=datetime.datetime.now()
+    hour=now.hour
+    minute=now.minute
+    second=now.second
+    currenttime=[int(hour/10),hour%10,int(minute/10),minute%10]
+    Display.Show(currenttime)
+    Display.ShowDoublePoint(second%2) 
+    time.sleep(1)
+
+
+/////////counter 0000 to 9999 display in 7 segment
+import sys
+import time
+import datetime
+import RPi.GPIO as GPIO
+import tm1637
+#CLk-GPIO23(pin 16)
+#DIO-GPIO23(pin 18)
+Display=tm1637.TM1637(23,24,tm1637.BRIGHT_TYPICAL)
+Display.Clear()
+Display.SetBrightnes(1)
+while(True):
+     for a in range (0,10):
+        for b in range (0,10):
+           for c in range (0,10):
+              for d in range(0,10):
+                 currenttime=[a,b,c,d]
+                 Display.Show(currenttime)
+                 time.sleep(1)
+
+///////////  four word in 4-digit 7 segment
+import sys
+import time 
+import datetime
+import RPi.GPIO as GPIO
+import tm1637
+Display=tm1637.TM1637(23,24,tm1637)
+Display.Clear()
+Display.SetBrightness(1)
+while(1):
+   a=[13,14,10,13]
+   Display.Show(a)
+   time.sleep(1)
+   b=[13,14,10,15]
+   Display.Show(b)
+   time.sleep(1)
+   c=[11,14,14,15]
+   Display.Show(c)
+   time.sleep(1)
+   d=[15,10,13,14]
+   Display.Show(d)
+   time.sleep(1)
+   
+
+
+///////////////// pi camera video with  rpi
+import Picamera
+from time import sleep
+camera =picamera.Picamera()
+camera.resolution =(1024,768)
+camera.start_preview()
+camera.strat_recording('/home/pi/Videos/demo.h264')
+camera.wait_recording(10)
+camera.stop_recording()
+camera.stop_preview()
+camera.close()
+print('Video recording stopped')
+
+
+
+
+/////////pi camera only
+import picamera
+from time import sleep
+camera=picamera.Picamera()
+camera.resolution=(1024,768)
+camera.brightness=60
+camera.start_preview()
+camera.annotate_text='hi pi user';
+sleep(5)
+camera.capture('image1.png')
+camera.stop_preview()
+
+
+//////////////module INTERFACE
+connection vcc 1
+gnd 6
+txd 10
+rxd 8
+sudo nano/boot/config.txt
+copy the code which already in this txt
+ 
+ctrl +exit and press y and enter to save
+sudo cat/dev/ttyAMA0
+
+
+CODE
+import time
+import serial
+import string
+import pynmea2
+import RPi.GPIO as gpio
+gpio.setmode(gpio.BCM)
+port = "/dev/ttyAMA0" # the serial port to which the pi is connected.
+
+#create a serial object
+ser = serial.Serial(port, baudrate = 9600, timeout = 0.5)
+while 1:
+    try:
+        data = ser.readline()
+#    	print data
+    except:
+	print("loading") 
+#wait for the serial port to churn out data
+
+    if data[0:6] == '$GPGGA':  
+	msg = pynmea2.parse(data)
+	print msg
+	time.sleep(2)
+
+
+
+
+
+
+   
